@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6137347063337764953}
   - component: {fileID: 8725957470449520665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle
   m_TagString: Muzzle Flash
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6137347063337764953}
   - component: {fileID: 8725957470449520665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Uzi
   m_TagString: Muzzle Flash
   m_Icon: {fileID: 0}
@@ -135,9 +135,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6137347063337764953}
     m_Modifications:
+    - target: {fileID: 100000, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_Name
       value: Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_RootOrder

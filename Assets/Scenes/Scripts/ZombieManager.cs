@@ -18,7 +18,8 @@ public class ZombieManager : MonoBehaviour
     bool alreadyAttacked;
 
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInHearRange, playerInAttackRange;
+    private float time;
 
     private void Awake(){
         player = GameObject.Find("Player").transform;
@@ -26,18 +27,33 @@ public class ZombieManager : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+    {  
+        if(Vector3.Distance(transform.position, player.position) < sightRange){
+            playerInSightRange = true;
+        } else if(Vector3.Distance(transform.position, player.position) > sightRange){
+            playerInSightRange = false;
+        }
+        if(Vector3.Distance(transform.position, player.position) < attackRange){
+            playerInAttackRange = true;
+        } else if(Vector3.Distance(transform.position, player.position) > attackRange){
+            playerInAttackRange = false;
+        }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
         if(!playerInSightRange && !playerInAttackRange) Patrolling();
-        if(playerInSightRange && !playerInSightRange) ChasePlayer();
+        if(playerInSightRange) ChasePlayer();
         if(playerInAttackRange && playerInSightRange) AttackPlayer();
     }
+
     private void Patrolling(){
+        time += Time.deltaTime;
+        
         if(!walkPointSet) SearchWalkPoint();
 
-        if(walkPointSet) agent.SetDestination(walkPoint);
+        if(walkPointSet){
+            agent.SetDestination(walkPoint);
+            walkPointSet = false;
+            
+        }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -47,19 +63,24 @@ public class ZombieManager : MonoBehaviour
     private void SearchWalkPoint(){
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
+        if(playerInSightRange == true){
+            walkPoint = player.position;
+        } else if (time > 10){
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            time = 0;
+        }
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){
+        if (Physics.Raycast(walkPoint, -transform.up, 2.6f, whatIsGround)){
             walkPointSet = true;
         }
     }
     private void ChasePlayer(){
         agent.SetDestination(player.position);
+        print(agent.destination);
     }
     private void AttackPlayer(){
-        agent.SetDestination(transform.position);
-
+        agent.SetDestination(player.position);
+        print(agent.destination);
         transform.LookAt(player);
 
         if(!alreadyAttacked){

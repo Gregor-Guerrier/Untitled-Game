@@ -42,6 +42,8 @@ public class ZombieManager : MonoBehaviour
         if(!playerInSightRange && !playerInAttackRange) Patrolling();
         if(playerInSightRange) ChasePlayer();
         if(playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        
     }
 
     private void Patrolling(){
@@ -63,23 +65,26 @@ public class ZombieManager : MonoBehaviour
     private void SearchWalkPoint(){
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
-        if(playerInSightRange == true){
-            walkPoint = player.position;
-        } else if (time > 10){
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-            time = 0;
-        }
 
         if (Physics.Raycast(walkPoint, -transform.up, 2.6f, whatIsGround)){
             walkPointSet = true;
         }
     }
     private void ChasePlayer(){
-        agent.SetDestination(player.position);
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        if(playerInSightRange == true){
+            Debug.Log("Path cleared: " + CheckPath(transform.position, player.position));
+        } else if (time > 10){
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            time = 0;
+        }
+        if(CheckPath(transform.position, player.position) == true) agent.SetDestination(player.position);
         print(agent.destination);
     }
     private void AttackPlayer(){
-        agent.SetDestination(player.position);
+        if(CheckPath(transform.position, player.position) == true) agent.SetDestination(player.position);
         print(agent.destination);
         transform.LookAt(player);
 
@@ -139,5 +144,24 @@ public class ZombieManager : MonoBehaviour
 
     private void Die(){
         Destroy(gameObject);
+    }
+
+    private bool CheckPath(Vector3 position, Vector3 target)
+    {
+        bool result = true;
+        Quaternion rotation = Quaternion.LookRotation(target - position);
+        Vector3 direction = target - position;
+        float distance = Vector3.Distance(position, target);
+
+        RaycastHit[] rhit = Physics.RaycastAll(position, direction, distance);
+        print("ok" + rhit);
+        Debug.DrawLine(position, target, Color.yellow);
+        if(rhit.Length > 0){
+            result = false;
+        }
+
+        Vector3 center = Vector3.Lerp(position, target, 0.5f);
+        // Debug.DrawRay(position, direction, result ? Color.green : Color.red);
+        return result;
     }
 }

@@ -25,6 +25,7 @@ public class Shoot : MonoBehaviour {
 	private int selectedMode;
 	public Vector2 xRecoil;
 	public Vector2 yRecoil;
+	public float adsSpeedMultiplyer;
 
 	[Header("Damage")]
 	public int damage;
@@ -63,6 +64,7 @@ public class Shoot : MonoBehaviour {
 	public float maxBloom;
 
 	private bool isShot;
+	private PlayerMovement _pm;
 	// Use this for initialization
 	void Start () {
 		camera = GetComponentInParent<Camera>();
@@ -76,6 +78,7 @@ public class Shoot : MonoBehaviour {
 		reloadPassed = reloadDelay;
 		hipFire.sizeDelta = new Vector2(9*spread, 9*spread);
 		recoilPosition = gunModel.localPosition;
+		_pm = transform.parent.GetComponentInParent<PlayerMovement>();
 		
 	}
 	
@@ -105,15 +108,13 @@ public class Shoot : MonoBehaviour {
 		if(Input.GetMouseButton(1) || Input.GetAxis("Aiming") > .1f){
 			spread = 0;
 			bloomEffect = 1;
+			_pm.isAiming = true;
+			_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
 			if(time < 1){
 				time += Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0,  0-sight.localPosition.y/10, -sight.localPosition.z * 1.25f), time);
+				camera.transform.localPosition = Vector3.Lerp(new Vector3(0, 1.45f, .35f), new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), time*2f);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
-			}
-			if(time > .35f){
-				for(int i = 0; i < hipFire.gameObject.GetComponentsInChildren<Image>().Length; i++){
-					hipFire.gameObject.GetComponentsInChildren<Image>()[i].color = Vector4.Lerp(new Vector4(0, 0, 0, 165), new Vector4(0, 0, 0, 0), Time.deltaTime);
-				}
 			}
 			if(time > .2f){
 				hipFire.gameObject.SetActive(false);
@@ -124,24 +125,25 @@ public class Shoot : MonoBehaviour {
 			if(time > 0){
 				time -= Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, originalGunPosition, 1-time);
+				camera.transform.localPosition = Vector3.Lerp(new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), new Vector3(0, 1.45f, .35f), 1-time*2f);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), time);
-			} 
+				_pm.isAiming = false;
+			}
 			if(time < .2f){
 				hipFire.gameObject.SetActive(true);
-				for(int i = 0; i < hipFire.gameObject.GetComponentsInChildren<Image>().Length; i++){
-					hipFire.gameObject.GetComponentsInChildren<Image>()[i].color = Vector4.Lerp(new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 165), ((.45f-time)*10));
-				}
 				spread = originalSpread * bloomEffect;
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+				_pm.isAiming = false;
+				_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
 			}
 			
 		}
 		if(recoilTime > 0){
-			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime*4;
-			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime*4);
-			gunModel.localPosition = Vector3.Lerp(recoilPosition, new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .07f), Time.deltaTime*50);
+			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime*3;
+			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime*3);
+			gunModel.localPosition = Vector3.Lerp(recoilPosition, new Vector3(recoilPosition.x + Random.Range(-.5f, .5f), recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*10);
 		} else if(recoilTime < 0){
-			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, recoilPosition, Time.deltaTime*50);
+			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, recoilPosition, Time.deltaTime*14);
 		} 
 
 		if(Input.GetAxis("Shooting") < .1f){

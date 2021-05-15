@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1b74da25-449d-e296-5057-7948842ba3ae}</ProjectGuid>
+    <ProjectGuid>{4c713abc-8fec-9b3a-d0db-33fb8830230f}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>VSSettingsProvider</AssemblyName>
@@ -286,22 +286,22 @@
         <HintPath>E:/Development Studio/Game Engines/2021.1.0b1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="YamlDotNet">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/YamlDotNet/YamlDotNet.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/YamlDotNet/YamlDotNet.dll</HintPath>
     </Reference>
     <Reference Include="IonicZip">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/DotNetZip/IonicZip.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/DotNetZip/IonicZip.dll</HintPath>
     </Reference>
     <Reference Include="JMOAssets">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
     </Reference>
     <Reference Include="MiscUtil">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Core/Dependencies/MiscUtil/MiscUtil.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Core/Dependencies/MiscUtil/MiscUtil.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Flow/Dependencies/NCalc/Antlr3.Runtime.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Flow/Dependencies/NCalc/Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
         <HintPath>E:/Development Studio/Game Engines/2021.1.0b1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -651,39 +651,39 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.VisualScripting.Core.csproj">
-      <Project>{711574d1-e7bf-8990-153a-5b9120f45e57}</Project>
+      <Project>{717eeda1-5821-94a8-19d1-75cefd1dc6ef}</Project>
       <Name>Unity.VisualScripting.Core</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
-      <Project>{6cc3faf5-e71c-ed58-98b7-cb665a8843cb}</Project>
+      <Project>{61fc394a-7de2-fcfa-8471-44aa591dfe3e}</Project>
       <Name>Unity.VisualScripting.Core.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
-      <Project>{0240d19f-5fea-1eb7-b016-10edf639c2e2}</Project>
+      <Project>{b21eb6ac-5e33-deb8-4e15-7b231bd107bc}</Project>
       <Name>Unity.VisualScripting.Flow</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
-      <Project>{be4ce39e-959f-d13c-69b3-3b937beb5a1f}</Project>
+      <Project>{5daa5301-965c-358e-b3b1-9a129c8c0880}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
-      <Project>{ae9c4570-1d4f-86eb-7255-a206972c7a11}</Project>
+      <Project>{dc0cc03d-f31e-8b2a-35cf-ceee14b52bbf}</Project>
       <Name>Unity.VisualScripting.State</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{738eb97a-0905-e9df-e8ef-8df3c9e4f5bc}</Project>
+      <Project>{f4e5b7f8-1f0c-bd17-af2d-4539893d1298}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{5d6d3fbd-e7cf-06b5-a3a4-8b8b12a7802a}</Project>
+      <Project>{bd77f3be-f915-2f63-b810-8fb3fefae944}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{c73d0432-3855-c8a9-13b2-543083c0ccfa}</Project>
+      <Project>{74345ea8-7eb8-7429-6884-8a2cfc7aa748}</Project>
       <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{1c67fc54-3f37-08d4-60ee-8d90bb92a55f}</Project>
+      <Project>{f75aec50-3c0a-2425-fc08-c9c26be39a73}</Project>
       <Name>UnityEditor.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4cfdecb7-ce68-27da-9179-ae7a610767da}</ProjectGuid>
+    <ProjectGuid>{889927be-1897-dc22-4806-812cdd4801c3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Timeline</AssemblyName>
@@ -350,22 +350,22 @@
         <HintPath>E:/Development Studio/Game Engines/2021.1.0b1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="YamlDotNet">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/YamlDotNet/YamlDotNet.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/YamlDotNet/YamlDotNet.dll</HintPath>
     </Reference>
     <Reference Include="IonicZip">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/DotNetZip/IonicZip.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Editor/VisualScripting.Core/Dependencies/DotNetZip/IonicZip.dll</HintPath>
     </Reference>
     <Reference Include="JMOAssets">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
     </Reference>
     <Reference Include="MiscUtil">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Core/Dependencies/MiscUtil/MiscUtil.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Core/Dependencies/MiscUtil/MiscUtil.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Flow/Dependencies/NCalc/Antlr3.Runtime.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.visualscripting@1.5.1-pre.3/Runtime/VisualScripting.Flow/Dependencies/NCalc/Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Script Making Area/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>F:/Users/i7/Dropbox/WorkingWeaponSystem/WorkingWeaponSystem/Untitled-Game/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>E:/Development Studio/Game Engines/2021.1.0b1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -715,11 +715,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{738eb97a-0905-e9df-e8ef-8df3c9e4f5bc}</Project>
+      <Project>{f4e5b7f8-1f0c-bd17-af2d-4539893d1298}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{5d6d3fbd-e7cf-06b5-a3a4-8b8b12a7802a}</Project>
+      <Project>{bd77f3be-f915-2f63-b810-8fb3fefae944}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
   </ItemGroup>

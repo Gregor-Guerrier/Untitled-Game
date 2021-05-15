@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     float percievedGravity;
+    public bool isAiming;
+    public float adsSpeedMultiplyer;
+    public float shootingSpeedMultiplyer;
     void Start()
     {
         percievedGravity = gravity/9.81f;
@@ -39,10 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if(Input.GetKey(KeyCode.LeftShift)){
+        if(Input.GetKey(KeyCode.LeftShift) && isAiming == false){
             controller.Move(move * speed * sprintMultiplier * Time.deltaTime);
-        } else if(!Input.GetKey(KeyCode.LeftShift)){
+        } else if(!Input.GetKey(KeyCode.LeftShift) && isAiming == false){
             controller.Move(move * speed * Time.deltaTime);
+        } else if(isAiming == true){
+            controller.Move(move * speed * adsSpeedMultiplyer * Time.deltaTime);
         }
 
         if(Input.GetButtonDown("Jump") && isGrounded)

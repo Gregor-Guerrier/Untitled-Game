@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if(Vector3.Distance(originalLocation, this.transform.position) > 5){
+        if(Vector3.Distance(originalLocation, this.transform.position) > 2){
             trailRenderer.enabled = true;
         } else {
             trailRenderer.enabled = false;
@@ -59,6 +59,16 @@ public class Projectile : MonoBehaviour
                     Transform marker = Instantiate(Resources.Load<Transform>("Hitmarker"), GameObject.FindGameObjectWithTag("Center").transform.position, Resources.Load<Transform>("Hitmarker").rotation, GameObject.FindGameObjectWithTag("Canvas").transform);
                     print(hitInfo.collider.material.name.Replace(" (Instance)", ""));
                     PlayerManager _pm = hitInfo.collider.gameObject.GetComponent<PlayerManager>(); 
+                    if(_pm.Damage(damage, damageMultiplier, hitInfo.collider.material.name.Replace(" (Instance)", "")) == true){
+                        for(int i = 0; i < marker.GetComponentsInChildren<Image>().Length; i++){
+                            marker.GetComponentsInChildren<Image>()[i].color = Color.red;
+                        }
+                    }              
+                }
+                if(hitInfo.collider.gameObject.layer == 8){
+                    Transform marker = Instantiate(Resources.Load<Transform>("Hitmarker"), GameObject.FindGameObjectWithTag("Center").transform.position, Resources.Load<Transform>("Hitmarker").rotation, GameObject.FindGameObjectWithTag("Canvas").transform);
+                    print(hitInfo.collider.material.name.Replace(" (Instance)", ""));
+                    ZombieManager _pm = hitInfo.collider.gameObject.GetComponent<ZombieManager>(); 
                     if(_pm.Damage(damage, damageMultiplier, hitInfo.collider.material.name.Replace(" (Instance)", "")) == true){
                         for(int i = 0; i < marker.GetComponentsInChildren<Image>().Length; i++){
                             marker.GetComponentsInChildren<Image>()[i].color = Color.red;

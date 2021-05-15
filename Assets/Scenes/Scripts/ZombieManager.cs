@@ -8,7 +8,8 @@ public class ZombieManager : MonoBehaviour
     public int health;
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    [SerializeField]
+    LayerMask whatIsGround, whatIsPlayer;
 
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -21,13 +22,13 @@ public class ZombieManager : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
     private float time;
     public bool targeted;
-    private void Awake(){
+    private void Awake()
+    {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void FixedUpdate()
-    {  
+    void FixedUpdate(){  
         if(Vector3.Distance(transform.position, player.position) < sightRange){
             playerInSightRange = true;
         } else if(Vector3.Distance(transform.position, player.position) > sightRange){
@@ -45,14 +46,17 @@ public class ZombieManager : MonoBehaviour
         if(targeted){
             agent.SetDestination(player.position);
             GameObject[] Zombies = GameObject.FindGameObjectsWithTag("Zombie");
-            for(int i = 0; i < Zombies.Length; i++){
-                if(Vector3.Distance(transform.position, Zombies[i].transform.position) < sightRange * 1.5f){
+            for(int i = 0; i < Zombies.Length; i++)
+            {
+                if(Vector3.Distance(transform.position, Zombies[i].transform.position) < sightRange * 1.5f)
+                {
                     Zombies[i].GetComponent<ZombieManager>().targeted = true;
                 }
             }
             agent.SetDestination(player.position);
         }
-        if(targeted == true && Vector3.Distance(transform.position, player.position) > sightRange * 3f){
+        if(targeted == true && Vector3.Distance(transform.position, player.position) > sightRange * 3f)
+        {
             float randomZ = Random.Range(-walkPointRange, walkPointRange);
             float randomX = Random.Range(-walkPointRange, walkPointRange);
             walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
@@ -61,12 +65,14 @@ public class ZombieManager : MonoBehaviour
         
     }
 
-    private void Patrolling(){
+    private void Patrolling()
+    {
         time += Time.deltaTime;
         
         if(!walkPointSet) SearchWalkPoint();
 
-        if(walkPointSet){
+        if(walkPointSet)
+        {
             agent.SetDestination(walkPoint);
             walkPointSet = false;
             
@@ -77,59 +83,73 @@ public class ZombieManager : MonoBehaviour
         if(distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
     }
 
-    private void SearchWalkPoint(){
+    private void SearchWalkPoint()
+    {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        if (time > 10){
+        if (time > 10)
+        {
             walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
             time = 0;
         }
-        if (Physics.Raycast(walkPoint, -transform.up, 2.6f, whatIsGround)){
+        if (Physics.Raycast(walkPoint, -transform.up, 2.6f, whatIsGround))
+        {
             walkPointSet = true;
         }
     }
-    private void ChasePlayer(){
-        if(CheckPath(transform.position, player.position) == true){
+    private void ChasePlayer()
+    {
+        if(CheckPath(transform.position, player.position) == true)
+        {
             agent.SetDestination(player.position);
             targeted = true;
         }
 
     }
 
-    public bool Damage(int damage, Vector4 multipliers, string location)
-    {
-        if(location == "Head"){
+    public bool Damage(int damage, Vector4 multipliers, string location){
+        if(location == "Head")
+        {
             health -= (int)(damage * multipliers.x * 1.1f);
-            if(health <= 0){
+            if(health <= 0)
+            {
                 Die();
                 return true;
             }
             return false;
-        } else if(location == "Thorax"){
+        } else if(location == "Thorax")
+        {
             health -= (int)(damage * multipliers.y * .95f);
-            if(health <= 0){
+            if(health <= 0)
+            {
                 Die();
                 return true;
             }
             return false;           
-        } else if(location == "Arms"){
+        } else if(location == "Arms")
+        {
             health -= (int)(damage * multipliers.z * .5f);
-            if(health <= 0){
+            if(health <= 0)
+            {
                 Die();
                 return true;
             }
             return false;            
-        } else if(location == "Legs"){
+        } else if(location == "Legs")
+        {
             health -= (int)(damage * multipliers.w * .5f);
-            if(health <= 0){
+            if(health <= 0)
+            {
                 Die();
                 return true;
             }
             return false;            
-        } else {
+        } else 
+        {
             health -= (int)(damage);
-            if(health <= 0){
+            if(health <= 0)
+            {
                 Die();
                 return true;
             }
@@ -140,7 +160,8 @@ public class ZombieManager : MonoBehaviour
         
     }
 
-    private void Die(){
+    private void Die()
+    {
         Destroy(gameObject);
     }
 
@@ -151,7 +172,7 @@ public class ZombieManager : MonoBehaviour
         Vector3 direction = target - position;
         float distance = Vector3.Distance(position, target);
 
-        var relativePoint = transform.InverseTransformPoint(target);
+        Vector3 relativePoint = transform.InverseTransformPoint(target);
         RaycastHit[] rhit = Physics.RaycastAll(position, direction, distance);
         Debug.DrawLine(position, target, Color.yellow);
         print(relativePoint.z);

@@ -143,10 +143,10 @@ public class Shoot : MonoBehaviour {
 		if(recoilTime > 0){
 			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime*3;
 			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime*3);
-			gunModel.localPosition = Vector3.Lerp(recoilPosition, new Vector3(recoilPosition.x + Random.Range(-.5f, .5f), recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*10);
+			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*12.5f);
 		} else if(recoilTime < 0){
-			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, recoilPosition, Time.deltaTime*14);
-		} 
+			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), Time.deltaTime*12.5f);
+		}
 
 		if(Input.GetAxis("Shooting") < .1f){
 			isShot = false;

@@ -17,10 +17,10 @@ public class ZombieManager : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInHearRange, playerInAttackRange;
+    public float sightRange, attackRange, hearRange;
+    public bool playerInSightRange, playerInAttackRange;
     private float time;
-
+    public bool targeted;
     private void Awake(){
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -41,8 +41,23 @@ public class ZombieManager : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         if(!playerInSightRange && !playerInAttackRange) Patrolling();
         if(playerInSightRange) ChasePlayer();
-        if(playerInAttackRange && playerInSightRange) AttackPlayer();
 
+        if(targeted){
+            agent.SetDestination(player.position);
+            GameObject[] Zombies = GameObject.FindGameObjectsWithTag("Zombie");
+            for(int i = 0; i < Zombies.Length; i++){
+                if(Vector3.Distance(transform.position, Zombies[i].transform.position) < sightRange * 1.5f){
+                    Zombies[i].GetComponent<ZombieManager>().targeted = true;
+                }
+            }
+            agent.SetDestination(player.position);
+        }
+        if(targeted == true && Vector3.Distance(transform.position, player.position) > sightRange * 3f){
+            float randomZ = Random.Range(-walkPointRange, walkPointRange);
+            float randomX = Random.Range(-walkPointRange, walkPointRange);
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            targeted = false;
+        }
         
     }
 
@@ -66,41 +81,24 @@ public class ZombieManager : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
+        if (time > 10){
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            time = 0;
+        }
         if (Physics.Raycast(walkPoint, -transform.up, 2.6f, whatIsGround)){
             walkPointSet = true;
         }
     }
     private void ChasePlayer(){
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        if(playerInSightRange == true){
-            Debug.Log("Path cleared: " + CheckPath(transform.position, player.position));
-        } else if (time > 10){
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-            time = 0;
+        if(CheckPath(transform.position, player.position) == true){
+            agent.SetDestination(player.position);
+            targeted = true;
         }
-        if(CheckPath(transform.position, player.position) == true) agent.SetDestination(player.position);
-        print(agent.destination);
-    }
-    private void AttackPlayer(){
-        if(CheckPath(transform.position, player.position) == true) agent.SetDestination(player.position);
-        print(agent.destination);
-        transform.LookAt(player);
 
-        if(!alreadyAttacked){
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-    private void ResetAttack(){
-        alreadyAttacked = false;
     }
 
     public bool Damage(int damage, Vector4 multipliers, string location)
     {
-        print(location);
         if(location == "Head"){
             health -= (int)(damage * multipliers.x * 1.1f);
             if(health <= 0){
@@ -153,10 +151,11 @@ public class ZombieManager : MonoBehaviour
         Vector3 direction = target - position;
         float distance = Vector3.Distance(position, target);
 
+        var relativePoint = transform.InverseTransformPoint(target);
         RaycastHit[] rhit = Physics.RaycastAll(position, direction, distance);
-        print("ok" + rhit);
         Debug.DrawLine(position, target, Color.yellow);
-        if(rhit.Length > 0){
+        print(relativePoint.z);
+        if(rhit.Length > 0 || relativePoint.z < 0){
             result = false;
         }
 

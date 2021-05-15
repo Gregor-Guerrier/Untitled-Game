@@ -329,11 +329,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!23 &131791428
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -639,11 +640,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!23 &212079888
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1064,11 +1066,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!23 &620789446
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1643,11 +1646,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!195 &1042432861
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2200,11 +2204,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!23 &1317924263
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2876,11 +2881,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   timeBetweenAttacks: 5
-  sightRange: 20
+  sightRange: 15
   attackRange: 0
+  hearRange: 0
   playerInSightRange: 0
-  playerInHearRange: 0
   playerInAttackRange: 0
+  targeted: 0
 --- !u!23 &1829373439
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3100,9 +3106,9 @@ MonoBehaviour:
   spread: 3
   modes:
   - auto
-  xRecoil: {x: 0, y: 30}
-  yRecoil: {x: -30, y: 30}
-  adsSpeedMultiplyer: 0.6
+  xRecoil: {x: 0, y: 25}
+  yRecoil: {x: -25, y: 25}
+  adsSpeedMultiplyer: 0.7
   damage: 11
   damageRange: 1000
   damageDropoff: 0.8
@@ -3115,7 +3121,7 @@ MonoBehaviour:
   reload: {fileID: 0}
   hipFire: {fileID: 209845144}
   gunModel: {fileID: 79176909}
-  maxBloom: 2.5
+  maxBloom: 1.5
 --- !u!1 &2143097436
 GameObject:
   m_ObjectHideFlags: 0

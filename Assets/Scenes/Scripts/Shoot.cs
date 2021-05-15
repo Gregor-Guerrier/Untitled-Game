@@ -90,6 +90,8 @@ public class Shoot : MonoBehaviour {
 		} else if(bloomEffect > maxBloom){
 			bloomEffect = maxBloom;
 		}
+		bloomEffect += Mathf.Abs(Input.GetAxis("Horizontal")/7.5f);
+		bloomEffect += Mathf.Abs(Input.GetAxis("Vertical")/7.5f);
 		recoilTime -= Time.deltaTime;
 	    timePassed -= Time.deltaTime;
 	    reloadPassed -= Time.deltaTime;

@@ -62,11 +62,11 @@ public class Shoot : MonoBehaviour {
 	private float bloomEffect;
 	[Range(1,5)]
 	public float maxBloom;
-
-	private bool isShot;
 	private PlayerMovement _pm;
+	private GameManager gm;
 	// Use this for initialization
 	void Start () {
+		gm = GameObject.FindObjectOfType<GameManager>();
 		camera = GetComponentInParent<Camera>();
 		mouseLook = GetComponentInParent<MouseLook>();
 		originalCameraPosition = camera.transform.localPosition;
@@ -83,56 +83,85 @@ public class Shoot : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () 
+	{
+		//Bloom Effect
 		bloomEffect -= Time.deltaTime*5;
-		if(bloomEffect < 1){
+		if(bloomEffect < 1)
+		{
 			bloomEffect = 1;
-		} else if(bloomEffect > maxBloom){
+		} else if(bloomEffect > maxBloom)
+		{
 			bloomEffect = maxBloom;
 		}
 		bloomEffect += Mathf.Abs(Input.GetAxis("Horizontal")/7.5f);
 		bloomEffect += Mathf.Abs(Input.GetAxis("Vertical")/7.5f);
+		
+		//Reducing Time
 		recoilTime -= Time.deltaTime;
 	    timePassed -= Time.deltaTime;
 	    reloadPassed -= Time.deltaTime;
-		if(projectilesPerShot == 1){
+
+		//Figure out if the gun is a shotgun or not
+		if(projectilesPerShot == 1)
+		{
 			NotShotgun();
-		} else {
+		} else 
+		{
 			Shotgun();
 		}
-		if (Input.GetKeyDown(KeyCode.R) && ammunition > 0 && reloadPassed <= 0){
+
+		//Reloading
+		if (Input.GetKeyDown(gm.keybindManager.reload.primaryBind) && ammunition > 0 && reloadPassed <= 0)
+		{
 			Reload();		    
+		} else if (Input.GetKeyDown(gm.keybindManager.reload.altBind) && ammunition > 0 && reloadPassed <= 0)
+		{
+			Reload();	
 		}
 
-		if(Input.GetKeyDown(KeyCode.B) && modes.Length > 1){
+		//Switch Firemode
+		if(Input.GetKeyDown(gm.keybindManager.firemode.primaryBind) && modes.Length > 1)
+		{
+			Switch();
+		} else if(Input.GetKeyDown(gm.keybindManager.firemode.altBind) && modes.Length > 1)
+		{
 			Switch();
 		}
-		if(Input.GetMouseButton(1) || Input.GetAxis("Aiming") > .1f){
+
+		//Aiming Down Sights
+		if(Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) || Input.GetKey(gm.keybindManager.aimDownSights.altBind))
+		{
 			spread = 0;
 			bloomEffect = 1;
 			_pm.isAiming = true;
 			_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
-			if(time < 1){
+			if(time < 1)
+			{
 				time += Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0,  0-sight.localPosition.y/10, -sight.localPosition.z * 1.25f), time);
 				camera.transform.localPosition = Vector3.Lerp(new Vector3(0, 1.45f, .35f), new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), time*2f);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
 			}
-			if(time > .2f){
+			if(time > .2f)
+			{
 				hipFire.gameObject.SetActive(false);
 			}
 			
 			
-		} else if(!Input.GetMouseButton(1) || Input.GetAxis("Aiming") < .1f){
+		} else if(!Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) || !Input.GetKeyDown(gm.keybindManager.aimDownSights.altBind))
+		{
 			spread = originalSpread * bloomEffect;
-			if(time > 0){
+			if(time > 0)
+			{
 				time -= Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, originalGunPosition, 1-time);
 				camera.transform.localPosition = Vector3.Lerp(new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), new Vector3(0, 1.45f, .35f), 1-time*2f);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), time);
 				_pm.isAiming = false;
 			}
-			if(time < .2f){
+			if(time < .2f)
+			{
 				hipFire.gameObject.SetActive(true);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
 				_pm.isAiming = false;
@@ -140,23 +169,23 @@ public class Shoot : MonoBehaviour {
 			}
 			
 		}
-		if(recoilTime > 0){
+		if(recoilTime > 0)
+		{
 			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime;
 			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime);
 			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*5f);
-		} else if(recoilTime < 0){
+		} else if(recoilTime < 0)
+		{
 			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), Time.deltaTime*5f);
-		}
-
-		if(Input.GetAxis("Shooting") < .1f){
-			isShot = false;
 		}
 	}
 
 	
 	//For Rifles, Subs, and Others
-	private void NotShotgun(){
-		if (Input.GetButton("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false || Input.GetAxis("Shooting") > .1f && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false){
+	private void NotShotgun()
+	{
+		if (Input.GetKey(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false || Input.GetKey(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false)
+		{
 			var rotationX = barrel.rotation.eulerAngles.x;
 			rotationX += Random.insideUnitCircle.x * Random.Range(-spread, spread);
 			var rotationY = barrel.rotation.eulerAngles.y;
@@ -179,7 +208,8 @@ public class Shoot : MonoBehaviour {
 		    timePassed = 60/roundsPerMinute;
 		}
 
-		if(Input.GetButtonDown("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false|| Input.GetAxis("Shooting") > .1f && isShot == false && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false){
+		if(Input.GetKeyDown(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false || Input.GetKeyDown(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false)
+		{
 			var rotationX = barrel.rotation.eulerAngles.x;
 			rotationX += Random.insideUnitCircle.x * Random.Range(-spread, spread);
 			var rotationY = barrel.rotation.eulerAngles.y;
@@ -198,21 +228,23 @@ public class Shoot : MonoBehaviour {
 		    amountInMag--;
 			bloomEffect += 2f;
 			recoilTime = .025f;
-			isShot = true;
 		    timePassed = 60/roundsPerMinute;
 		}
 
-		if(Input.GetButtonDown("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false || Input.GetAxis("Shooting") > .1f && isShot == false && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false){
+		if(Input.GetKeyDown(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false || Input.GetKeyDown(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false)
+		{
 			StartCoroutine(Burst());
 		}
 	}
 	//Burst firemode
-	private IEnumerator Burst(){
+	private IEnumerator Burst()
+	{
 		print(modes[selectedMode].Split(' ')[1]);
 		for (int i = 0; i < int.Parse(modes[selectedMode].Split(' ')[1]); i++)
     	{
 			burst = true;
-			if(amountInMag > 0){
+			if(amountInMag > 0)
+			{
 				var rotationX = barrel.rotation.eulerAngles.x;
 				rotationX += Random.insideUnitCircle.x * Random.Range(-spread, spread);
 				var rotationY = barrel.rotation.eulerAngles.y;
@@ -231,7 +263,6 @@ public class Shoot : MonoBehaviour {
 				amountInMag--;
 				bloomEffect += 2f;
 				recoilTime = .025f;
-				isShot = true;
 				yield return new WaitForSeconds(60/roundsPerMinute);
 				
 			}
@@ -243,7 +274,8 @@ public class Shoot : MonoBehaviour {
 	}
 	//For Shotguns ONLY
 	private void Shotgun(){
-		if (Input.GetButton("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false  || Input.GetAxis("Shooting") > .1f && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false){
+		if (Input.GetKey(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false || Input.GetKey(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "auto" && burst == false)
+		{
 			for(int i = 0; i < projectilesPerShot; i++){
 				var rotationX = barrel.rotation.eulerAngles.x;
 				rotationX += Random.insideUnitCircle.x * Random.Range(-spread, spread);
@@ -267,7 +299,8 @@ public class Shoot : MonoBehaviour {
 			bloomEffect += 2f;
 		} 
 
-		if(Input.GetButtonDown("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false || Input.GetAxis("Shooting") > .1f && isShot == false && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false){
+		if(Input.GetKeyDown(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false || Input.GetKeyDown(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false)
+		{
 			for(int i = 0; i < projectilesPerShot; i++){
 				var rotationX = barrel.rotation.eulerAngles.x;
 				rotationX += Random.insideUnitCircle.x * Random.Range(-spread, spread);
@@ -288,16 +321,17 @@ public class Shoot : MonoBehaviour {
 				timePassed = 60/roundsPerMinute;
 			}
 			amountInMag--;
-			isShot = true;
 			bloomEffect += 2f;
 		}
 		
-		if(Input.GetButtonDown("Fire1") && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false || Input.GetAxis("Shooting") > .1f && isShot == false && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "burst" && burst == false){
+		if(Input.GetKeyDown(gm.keybindManager.shoot.primaryBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false || Input.GetKeyDown(gm.keybindManager.shoot.altBind) && amountInMag > 0 && timePassed <= 0 && modes[selectedMode].Split(' ')[0] == "semi" && burst == false)
+		{
 			StartCoroutine(BurstShotgun());
 		}
 	}
 
-	private IEnumerator BurstShotgun(){
+	private IEnumerator BurstShotgun()
+	{
 		print(modes[selectedMode].Split(' ')[1]);
 		for (int i = 0; i < int.Parse(modes[selectedMode].Split(' ')[1]); i++)
     	{
@@ -320,7 +354,6 @@ public class Shoot : MonoBehaviour {
 				p.damageDropoff = damageDropoff;
 				p.damageRange = damageRange;
 				recoilTime = .025f;
-				isShot = true;
 				timePassed = 60/roundsPerMinute;
 				
 			}
@@ -336,31 +369,34 @@ public class Shoot : MonoBehaviour {
 	}
 
 	//Reloadings
-	private void Reload(){
+	private void Reload()
+	{
 		if(ammunition >= magazineSize){
 			ammunition = ammunition - (magazineSize - amountInMag);
 			amountInMag = amountInMag + (magazineSize - amountInMag);
 			reloadPassed = reloadDelay;
 			
-		} else if (ammunition < magazineSize){
+		} else if (ammunition < magazineSize)
+		{
 			amountInMag = ammunition;
 			ammunition = ammunition - (magazineSize - amountInMag);
 			reloadPassed = reloadDelay;
 		}
 	}
 
-	private void Switch(){
+	private void Switch()
+	{
 		selectedMode++;
-		if(selectedMode > modes.Length - 1){
+		if(selectedMode > modes.Length - 1)
+		{
 			selectedMode = 0;
 		}
 	}
 
-	private void Recoil(float xAxisRecoil, float yAxisRecoil){
-		print("Part 4");
+	private void Recoil(float xAxisRecoil, float yAxisRecoil)
+	{
 		recoilTime = .025f;
 		while(recoilTime > 0){
-			print("Part 5");
 			
 		}
 	}

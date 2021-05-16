@@ -36,28 +36,29 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Gun Scripts\Projectile.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_DeleteAfterDelay.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_RandomDir.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
-     <Compile Include="Assets\Scenes\Scripts\ZombieManager.cs" />
-     <Compile Include="Assets\Scenes\Scripts\Shoot.cs" />
+     <Compile Include="Assets\Scripts\Zombie Scripts\ZombieManager.cs" />
+     <Compile Include="Assets\Scripts\Gun Scripts\Shoot.cs" />
+     <Compile Include="Assets\Scripts\General Managers\GameManager.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo.cs" />
-     <Compile Include="Assets\Scenes\Scripts\Hit.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
-     <Compile Include="Assets\Scenes\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Scenes\Scripts\GunSway.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\Gun Scripts\GunSway.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
-     <Compile Include="Assets\Scenes\Scripts\Spawns.cs" />
+     <Compile Include="Assets\Scripts\General Managers\Spawns.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
-     <Compile Include="Assets\Scenes\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
      <Compile Include="Assets\Resources\Bulletholes\Destroy.cs" />
-     <Compile Include="Assets\Scenes\Scripts\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerManager.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_Translate.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_Wall.cs" />
+     <Compile Include="Assets\Scripts\General Managers\KeybindManager.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
      <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
@@ -699,21 +700,9 @@
       <Project>{d71c1887-e976-69fb-7b95-2ee9bc2c7518}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{a1f94211-e628-a6a0-b39a-bf4ba76aa3f8}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="VSSettingsProvider.csproj">
       <Project>{4c713abc-8fec-9b3a-d0db-33fb8830230f}</Project>
       <Name>VSSettingsProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
-      <Project>{b2733531-f126-57f0-e4a0-8be780d0b209}</Project>
-      <Name>NavMeshComponentsExamplesEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamples.csproj">
-      <Project>{bdc1ec3b-f457-460d-b768-c8392f7f778f}</Project>
-      <Name>NavMeshComponentsExamples</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{b21eb6ac-5e33-deb8-4e15-7b231bd107bc}</Project>
@@ -731,10 +720,6 @@
       <Project>{bd77f3be-f915-2f63-b810-8fb3fefae944}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{22887ca0-53b7-31bc-ddbe-f126677bdca4}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{dc0cc03d-f31e-8b2a-35cf-ceee14b52bbf}</Project>
       <Name>Unity.VisualScripting.State</Name>
@@ -742,6 +727,22 @@
     <ProjectReference Include="Unity.VisualScripting.Core.csproj">
       <Project>{717eeda1-5821-94a8-19d1-75cefd1dc6ef}</Project>
       <Name>Unity.VisualScripting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
+      <Project>{b2733531-f126-57f0-e4a0-8be780d0b209}</Project>
+      <Name>NavMeshComponentsExamplesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{a1f94211-e628-a6a0-b39a-bf4ba76aa3f8}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{22887ca0-53b7-31bc-ddbe-f126677bdca4}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamples.csproj">
+      <Project>{bdc1ec3b-f457-460d-b768-c8392f7f778f}</Project>
+      <Name>NavMeshComponentsExamples</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

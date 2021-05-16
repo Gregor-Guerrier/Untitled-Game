@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2174190aa2fb734a9d84debbd148f75, type: 3}
+  m_Name: Binds Profile
+  m_EditorClassIdentifier: 
+  profileName: 
+  forward:
+    primaryBind: 119
+    altBind: 273
+  backward:
+    primaryBind: 115
+    altBind: 274
+  left:
+    primaryBind: 97
+    altBind: 276
+  right:
+    primaryBind: 100
+    altBind: 275
+  sprint:
+    primaryBind: 304
+    altBind: 0
+  jump:
+    primaryBind: 32
+    altBind: 0
+  crouch:
+    primaryBind: 0
+    altBind: 0
+  prone:
+    primaryBind: 0
+    altBind: 0
+  leanLeft:
+    primaryBind: 0
+    altBind: 0
+  leanRight:
+    primaryBind: 0
+    altBind: 0
+  shoot:
+    primaryBind: 323
+    altBind: 0
+  aimDownSights:
+    primaryBind: 324
+    altBind: 0
+  mount:
+    primaryBind: 0
+    altBind: 0
+  firemode:
+    primaryBind: 98
+    altBind: 0
+  reload:
+    primaryBind: 0
+    altBind: 0
+  useGrenade:
+    primaryBind: 0
+    altBind: 0

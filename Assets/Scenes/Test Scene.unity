@@ -623,6 +623,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  isGrounded: 0
   isAiming: 0
   adsSpeedMultiplyer: 0
   shootingSpeedMultiplyer: 0
@@ -647,8 +648,10 @@ MonoBehaviour:
   hydrationReductionTime: 0
   staminaReductionModifier: 1
   weightLimit: 30
-  weight: 0
+  stamina: 100
+  weight: 45
   canSprint: 1
+  isSprinting: 0
 --- !u!4 &604260313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 297694942403077589, guid: 9c17959664261974981e654c5a260718, type: 3}

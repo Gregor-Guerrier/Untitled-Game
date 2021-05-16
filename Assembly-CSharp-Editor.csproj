@@ -691,9 +691,21 @@
       <Project>{d71c1887-e976-69fb-7b95-2ee9bc2c7518}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{a1f94211-e628-a6a0-b39a-bf4ba76aa3f8}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="VSSettingsProvider.csproj">
       <Project>{4c713abc-8fec-9b3a-d0db-33fb8830230f}</Project>
       <Name>VSSettingsProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
+      <Project>{b2733531-f126-57f0-e4a0-8be780d0b209}</Project>
+      <Name>NavMeshComponentsExamplesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamples.csproj">
+      <Project>{bdc1ec3b-f457-460d-b768-c8392f7f778f}</Project>
+      <Name>NavMeshComponentsExamples</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{b21eb6ac-5e33-deb8-4e15-7b231bd107bc}</Project>
@@ -711,6 +723,10 @@
       <Project>{bd77f3be-f915-2f63-b810-8fb3fefae944}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{22887ca0-53b7-31bc-ddbe-f126677bdca4}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{dc0cc03d-f31e-8b2a-35cf-ceee14b52bbf}</Project>
       <Name>Unity.VisualScripting.State</Name>
@@ -718,22 +734,6 @@
     <ProjectReference Include="Unity.VisualScripting.Core.csproj">
       <Project>{717eeda1-5821-94a8-19d1-75cefd1dc6ef}</Project>
       <Name>Unity.VisualScripting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
-      <Project>{b2733531-f126-57f0-e4a0-8be780d0b209}</Project>
-      <Name>NavMeshComponentsExamplesEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{a1f94211-e628-a6a0-b39a-bf4ba76aa3f8}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{22887ca0-53b7-31bc-ddbe-f126677bdca4}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsExamples.csproj">
-      <Project>{bdc1ec3b-f457-460d-b768-c8392f7f778f}</Project>
-      <Name>NavMeshComponentsExamples</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

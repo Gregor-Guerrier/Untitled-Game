@@ -395,8 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787e3f5d79b543047a999d874891cd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0.5
-  maxAmount: 10
+  amount: 0.1
+  maxAmount: 0.2
   smoothAmount: 1
 --- !u!1001 &307511659
 PrefabInstance:
@@ -869,12 +869,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667454927}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.39, z: 0.477}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.069499984, z: -0.29508543}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.61862767}
   m_Children: []
-  m_Father: {fileID: 2061079327}
-  m_RootOrder: 2
+  m_Father: {fileID: 79176909}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &697692931 stripped
 Transform:
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d95db5c7b09de4d8ff5c8f4866124d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 500
+  mouseSensitivity: 300
   playerBody: {fileID: 604260313}
   xRotation: 0
 --- !u!1001 &1205981597
@@ -2204,7 +2204,6 @@ Transform:
   m_Children:
   - {fileID: 83571231}
   - {fileID: 79176909}
-  - {fileID: 667454928}
   m_Father: {fileID: 1084275099}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

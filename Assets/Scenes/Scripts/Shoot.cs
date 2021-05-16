@@ -83,7 +83,7 @@ public class Shoot : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		bloomEffect -= Time.deltaTime*5;
 		if(bloomEffect < 1){
 			bloomEffect = 1;
@@ -124,6 +124,7 @@ public class Shoot : MonoBehaviour {
 			
 			
 		} else if(!Input.GetMouseButton(1) || Input.GetAxis("Aiming") < .1f){
+			spread = originalSpread * bloomEffect;
 			if(time > 0){
 				time -= Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, originalGunPosition, 1-time);
@@ -133,7 +134,6 @@ public class Shoot : MonoBehaviour {
 			}
 			if(time < .2f){
 				hipFire.gameObject.SetActive(true);
-				spread = originalSpread * bloomEffect;
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
 				_pm.isAiming = false;
 				_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
@@ -141,11 +141,11 @@ public class Shoot : MonoBehaviour {
 			
 		}
 		if(recoilTime > 0){
-			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime*3;
-			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime*3);
-			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*12.5f);
+			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime;
+			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime);
+			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*5f);
 		} else if(recoilTime < 0){
-			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), Time.deltaTime*12.5f);
+			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), Time.deltaTime*5f);
 		}
 
 		if(Input.GetAxis("Shooting") < .1f){

@@ -177,7 +177,7 @@ public class GunManager : MonoBehaviour {
 		{
 			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime;
 			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime);
-			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .5f), Time.deltaTime*5f);
+			gunModel.localPosition = Vector3.Lerp(new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), new Vector3(recoilPosition.x, recoilPosition.y, recoilPosition.z - .10f), Time.deltaTime*5f);
 		} else if(recoilTime < 0)
 		{
 			gunModel.localPosition = Vector3.Lerp(gunModel.localPosition, new Vector3(gunModel.localPosition.x, gunModel.localPosition.y, recoilPosition.z), Time.deltaTime*5f);

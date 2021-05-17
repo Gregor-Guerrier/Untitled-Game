@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Projectile : MonoBehaviour
+public class ProjectileManager : MonoBehaviour
 {
     public float muzzleVelocity = 715.0f;
     public float maxRange = 715.0f;
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if(Vector3.Distance(originalLocation, this.transform.position) > 2){
+        if(Vector3.Distance(originalLocation, this.transform.position) > 50){
             trailRenderer.enabled = true;
         } else {
             trailRenderer.enabled = false;

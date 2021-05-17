@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shoot : MonoBehaviour {
+public class GunManager : MonoBehaviour {
     
 	[Header("Gun Parts")]
     public Transform barrel;
@@ -64,6 +64,7 @@ public class Shoot : MonoBehaviour {
 	public float maxBloom;
 	private PlayerMovement _pm;
 	private GameManager gm;
+	public Transform reticle;
 	// Use this for initialization
 	void Start () {
 		gm = GameObject.FindObjectOfType<GameManager>();
@@ -146,6 +147,7 @@ public class Shoot : MonoBehaviour {
 			if(time > .2f)
 			{
 				hipFire.gameObject.SetActive(false);
+				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask | (1 << 11);
 			}
 			
 			
@@ -154,6 +156,7 @@ public class Shoot : MonoBehaviour {
 			spread = originalSpread * bloomEffect;
 			if(time > 0)
 			{
+				
 				time -= Time.deltaTime * 3;
 				transform.localPosition = Vector3.Lerp(transform.localPosition, originalGunPosition, 1-time);
 				camera.transform.localPosition = Vector3.Lerp(new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), new Vector3(0, 1.45f, .35f), 1-time*2f);
@@ -162,6 +165,7 @@ public class Shoot : MonoBehaviour {
 			}
 			if(time < .2f)
 			{
+				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask & ~ (1 << 11);
 				hipFire.gameObject.SetActive(true);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
 				_pm.isAiming = false;
@@ -194,7 +198,7 @@ public class Shoot : MonoBehaviour {
 
 			Transform b = Instantiate(bullet, barrel.position, rot);
 			Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-            Projectile p = b.GetComponent<Projectile>();
+            ProjectileManager p = b.GetComponent<ProjectileManager>();
 			p.muzzleVelocity = bulletVelocity;
 			p.maxRange = maxRange;
 			p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);
@@ -218,7 +222,7 @@ public class Shoot : MonoBehaviour {
 
 			Transform b = Instantiate(bullet, barrel.position, rot);
 			Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-            Projectile p = b.GetComponent<Projectile>();
+            ProjectileManager p = b.GetComponent<ProjectileManager>();
 			p.muzzleVelocity = bulletVelocity;
 			p.maxRange = maxRange;
 			p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);
@@ -253,7 +257,7 @@ public class Shoot : MonoBehaviour {
 
 				Transform b = Instantiate(bullet, barrel.position, rot);
 				Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-				Projectile p = b.GetComponent<Projectile>();
+				ProjectileManager p = b.GetComponent<ProjectileManager>();
 				p.muzzleVelocity = bulletVelocity;
 				p.maxRange = maxRange;
 				p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);
@@ -285,7 +289,7 @@ public class Shoot : MonoBehaviour {
 				
 				Transform b = Instantiate(bullet, barrel.position, rot);
 				Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-				Projectile p = b.GetComponent<Projectile>();
+				ProjectileManager p = b.GetComponent<ProjectileManager>();
 				p.muzzleVelocity = bulletVelocity;
 				p.maxRange = maxRange;
 				p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);
@@ -310,7 +314,7 @@ public class Shoot : MonoBehaviour {
 
 				Transform b = Instantiate(bullet, barrel.position, rot);
 				Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-				Projectile p = b.GetComponent<Projectile>();
+				ProjectileManager p = b.GetComponent<ProjectileManager>();
 				p.muzzleVelocity = bulletVelocity;
 				p.maxRange = maxRange;
 				p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);
@@ -346,7 +350,7 @@ public class Shoot : MonoBehaviour {
 
 				Transform b = Instantiate(bullet, barrel.position, rot);
 				Instantiate(_as.transform, aBarrel.position, aBarrel.rotation, aBarrel);
-				Projectile p = b.GetComponent<Projectile>();
+				ProjectileManager p = b.GetComponent<ProjectileManager>();
 				p.muzzleVelocity = bulletVelocity;
 				p.maxRange = maxRange;
 				p.damageMultiplier = new Vector4(Head, Thorax, Arms, Legs);

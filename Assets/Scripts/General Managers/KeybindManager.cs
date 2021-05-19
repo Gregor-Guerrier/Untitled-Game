@@ -28,6 +28,7 @@ public class KeybindManager : ScriptableObject
     [Header("Weapons and Utility")]
     public Keybinds shoot;
     public Keybinds aimDownSights;
+    public Keybinds controlledHipFire;
     public Keybinds mount;
     public Keybinds firemode;
     public Keybinds reload;

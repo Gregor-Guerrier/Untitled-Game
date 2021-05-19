@@ -45,10 +45,13 @@ MonoBehaviour:
     altBind: 0
   shoot:
     primaryBind: 323
-    altBind: 0
+    altBind: 305
   aimDownSights:
     primaryBind: 324
     altBind: 0
+  controlledHipFire:
+    primaryBind: 9
+    altBind: 306
   mount:
     primaryBind: 0
     altBind: 0
@@ -56,7 +59,7 @@ MonoBehaviour:
     primaryBind: 98
     altBind: 0
   reload:
-    primaryBind: 0
+    primaryBind: 114
     altBind: 0
   useGrenade:
     primaryBind: 0

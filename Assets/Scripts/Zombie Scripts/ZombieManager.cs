@@ -111,7 +111,7 @@ public class ZombieManager : MonoBehaviour
     public bool Damage(int damage, Vector4 multipliers, string location){
         if(location == "Head")
         {
-            health -= (int)(damage * multipliers.x * 1.1f);
+            health -= (int)(damage * multipliers.x);
             if(health <= 0)
             {
                 Die();
@@ -120,7 +120,7 @@ public class ZombieManager : MonoBehaviour
             return false;
         } else if(location == "Thorax")
         {
-            health -= (int)(damage * multipliers.y * .95f);
+            health -= (int)(damage * multipliers.y);
             if(health <= 0)
             {
                 Die();

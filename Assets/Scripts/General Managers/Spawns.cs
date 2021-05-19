@@ -17,7 +17,7 @@ public class Spawns : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(2)){
             int randomSpawn = Random.Range(0, zombieNode.Length-1);
-            Instantiate(zombiePrefab, zombieNode[randomSpawn], zombieNode[randomSpawn]);
+            Instantiate(zombiePrefab, zombieNode[randomSpawn].position, zombieNode[randomSpawn].rotation);
         }
     }
 }

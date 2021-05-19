@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     float percievedGravity;
     public bool isAiming;
+    public bool isControlledAiming;
     public float adsSpeedMultiplyer;
     public float shootingSpeedMultiplyer;
 
@@ -66,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
             playerManager.Sprinting();
             playerManager.isSprinting = true;
             controller.Move(move * speed * sprintMultiplier * Time.deltaTime);
-        } else if(!Input.GetKey(gm.keybindManager.sprint.primaryBind) && isAiming == false || !Input.GetKey(gm.keybindManager.sprint.altBind) && isAiming == false)
+        } else if(!Input.GetKey(gm.keybindManager.sprint.primaryBind) && isAiming == false && isControlledAiming == false || !Input.GetKey(gm.keybindManager.sprint.altBind) && isAiming == false && isControlledAiming == false)
         {
             playerManager.isSprinting = false;
             controller.Move(move * speed * Time.deltaTime);
-        } else if(isAiming == true)
+        } else if(isAiming == true || isControlledAiming == true)
         {
             playerManager.isSprinting = false;
             controller.Move(move * speed * adsSpeedMultiplyer * Time.deltaTime);

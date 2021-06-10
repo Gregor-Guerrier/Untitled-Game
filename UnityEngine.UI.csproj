@@ -37,12 +37,12 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Image.cs" />
+     <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Slider.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\EventSystem\UIElements\PanelRaycaster.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Toggle.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutElement.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\IGraphicEnabledDisabled.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Selectable.cs" />
-     <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Slider.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\Layout\HorizontalLayoutGroup.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\Shadow.cs" />
      <Compile Include="E:\Development Studio\Game Engines\2021.1.0b1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Runtime\UI\Core\IMaskable.cs" />

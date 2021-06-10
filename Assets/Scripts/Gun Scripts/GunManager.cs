@@ -85,11 +85,14 @@ public class GunManager : MonoBehaviour {
 	private PlayerMovement _pm;
 	private GameManager gm;
 	private Vector3 adsLocation;
+
+	public Camera gunCamera;
 	// Use this for initialization
 	void Start () {
 		originalPosition = gunModel.localPosition;
 		adsLocation.y = ((originalPosition.y - (originalPosition.y + sight.localPosition.y + GameObject.Find("Perspective").transform.localPosition.y)));
-		adsLocation.z = (transform.localPosition.z + (sight.localPosition.z + GameObject.Find("Perspective").transform.localPosition.z));
+		print(gunCamera.transform.position.z - GameObject.Find("Perspective").transform.position.z);
+		adsLocation.z = (transform.localPosition.z + (gunCamera.transform.position.z - GameObject.Find("Perspective").transform.position.z));
 		gm = GameObject.FindObjectOfType<GameManager>();
 		mouseLook = GetComponentInParent<MouseLook>();
 		camera = GetComponentInParent<Camera>();
@@ -168,7 +171,10 @@ public class GunManager : MonoBehaviour {
 			if(time > .2f)
 			{
 				hipFire.gameObject.SetActive(false);
-				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask | (1 << 11);
+				if(reticle != null)
+				{
+					reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask | (1 << 11);
+				}
 			}
 			
 			
@@ -186,7 +192,10 @@ public class GunManager : MonoBehaviour {
 			}
 			if(time < .2f)
 			{
-				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask & ~ (1 << 11);
+				if(reticle != null)
+				{
+					reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask & ~ (1 << 11);
+				}
 				hipFire.gameObject.SetActive(true);
 				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
 				_pm.isAiming = false;

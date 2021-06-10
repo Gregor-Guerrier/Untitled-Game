@@ -2,7 +2,10 @@
 {
     Properties
     {
+        _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
+        _Emission("Emission", float) = 0
+        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
         _TexScale("Texture Scale", Range(0.01, 10)) = 0.1
     }
     SubShader

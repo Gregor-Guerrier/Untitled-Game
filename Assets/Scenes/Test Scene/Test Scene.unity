@@ -512,8 +512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787e3f5d79b543047a999d874891cd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0.1
-  maxAmount: 0.3
+  amount: 0.025
+  maxAmount: 0.1
   smoothAmount: 1
 --- !u!1001 &307511659
 PrefabInstance:
@@ -1122,6 +1122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab33eb58b984ba7439243a73f8d6fa23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fov: 90
   keybindManager: {fileID: 11400000, guid: 683086b1873aa64499aba40738ae4ed6, type: 2}
 --- !u!1 &771552061
 GameObject:

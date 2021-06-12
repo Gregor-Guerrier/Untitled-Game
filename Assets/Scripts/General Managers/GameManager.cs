@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool released;
-    private KeyCode tempKeyCode;
+    [Range(60, 90)]
+    public int fov;
+
+    private Camera playerCamera;
+    private Camera gunCamera;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -13,32 +18,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(!Input.GetKey(tempKeyCode))
-        {
-            released = true;
-            tempKeyCode = KeyCode.None;
+        if(SceneManager.GetActiveScene().name == "Test Scene"){
+            playerCamera = GameObject.Find("Reg Camera").GetComponent<Camera>();
+            gunCamera = GameObject.Find("Gun Camera").GetComponent<Camera>();
+            playerCamera.fieldOfView = fov;
         }
+        
     }
     public KeybindManager keybindManager;
-
-    public bool GetKey(KeyCode keyCode)
-    {
-        if(Input.GetKey(keyCode))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool GetKeyDown(KeyCode keyCode)
-    {
-        tempKeyCode = keyCode;
-        if(Input.GetKey(keyCode) && released == true)
-        {
-            released = false;
-            return true;
-        }
-        return false;
-    }
-    
 }

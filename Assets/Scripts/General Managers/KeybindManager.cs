@@ -34,5 +34,6 @@ public class KeybindManager : ScriptableObject
     public Keybinds reload;
     public Keybinds useGrenade;
 
-
+    [Header("Menu")]
+    public Keybinds pause;
 }

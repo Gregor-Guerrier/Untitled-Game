@@ -536,7 +536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4836295002683309243, guid: bfbf75738bb57ce4bb82683ef5e29a8d, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4836295002683309243, guid: bfbf75738bb57ce4bb82683ef5e29a8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -719,7 +719,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &604260310
 MonoBehaviour:
@@ -877,7 +877,7 @@ RectTransform:
   - {fileID: 209845144}
   - {fileID: 1963922925}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1046,84 +1046,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &728523489
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 728523490}
-  - component: {fileID: 728523491}
-  - component: {fileID: 728523492}
-  - component: {fileID: 728523493}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &728523490
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728523489}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &728523491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728523489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e2d45f4dea76e43b1199921b93e8ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleThreshold: 60
-  bulletholes: []
-  muzzleFlashes: []
-  hitMarkers: []
---- !u!114 &728523492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728523489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e04563cfe34917a418c27bcb8b9877d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 4836295002683309243, guid: bfbf75738bb57ce4bb82683ef5e29a8d, type: 3}
-  zombieNode:
-  - {fileID: 478491010}
---- !u!114 &728523493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728523489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab33eb58b984ba7439243a73f8d6fa23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fov: 90
-  keybindManager: {fileID: 11400000, guid: 683086b1873aa64499aba40738ae4ed6, type: 2}
 --- !u!1 &771552061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1140,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &883812641
 GameObject:
@@ -1375,7 +1297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1211102629037974125, guid: 6c269ce84aa601a4684454d8ff2a75b3, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1211102629037974125, guid: 6c269ce84aa601a4684454d8ff2a75b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2026,7 +1948,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1770055102
 GameObject:
@@ -2071,6 +1993,8 @@ GameObject:
   - component: {fileID: 1777210970}
   - component: {fileID: 1777210969}
   - component: {fileID: 1777210968}
+  - component: {fileID: 1777210972}
+  - component: {fileID: 1777210971}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2124,8 +2048,39 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1777210971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777210967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e2d45f4dea76e43b1199921b93e8ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleThreshold: 60
+  bulletholes: []
+  muzzleFlashes: []
+  hitMarkers: []
+--- !u!114 &1777210972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777210967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04563cfe34917a418c27bcb8b9877d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 4836295002683309243, guid: bfbf75738bb57ce4bb82683ef5e29a8d, type: 3}
+  zombieNode:
+  - {fileID: 478491010}
 --- !u!1 &1963922924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2237,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 15.38, z: 0}
 --- !u!1 &2061079326
 GameObject:

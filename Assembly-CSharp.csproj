@@ -43,6 +43,7 @@
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
      <Compile Include="Assets\Scripts\Zombie Scripts\ZombieManager.cs" />
      <Compile Include="Assets\Scripts\Gun Scripts\GunManager.cs" />
+     <Compile Include="Assets\SliderConnect.cs" />
      <Compile Include="Assets\Scripts\General Managers\GameManager.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo.cs" />
      <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />

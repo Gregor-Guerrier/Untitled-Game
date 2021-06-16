@@ -1,16 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+//Settings Menu Items
+[System.Serializable]
+public class SliderSettings {
+        public Text settingText;
+        public Slider settingSlider;
+}
+[System.Serializable]
+public class BoolSettings {
+        public Text settingText;
+        public Slider settingBool;
+}
+[System.Serializable]
+public class DropdownSettings {
+        public Text settingText;
+        public Slider settingDropdown;
+}
+
+//Actual Class
 public class GameManager : MonoBehaviour
 {
-    [Range(60, 90)]
-    public int fov;
 
     private Camera playerCamera;
-    private Camera gunCamera;
+
+    [Header("Pause Menu")]
     public GameObject pauseMenu;
+    public GameObject[] pauseMenuItems;
+
+    [Header("Settings")]
+    public SliderSettings fovSetting;
+    public SliderSettings sensSetting;
+    public SliderSettings volumeSetting;
+    public AudioMixer volumeMixer;
 
     private bool inGame;
     public bool menuOpen;
@@ -20,12 +46,31 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    //Get The Settings
+    private void Start()
+    {
+        
+        fovSetting.settingSlider.value = PlayerPrefs.GetFloat("FOV");
+        sensSetting.settingSlider.value = PlayerPrefs.GetFloat("Sensitivity");
+        volumeSetting.settingSlider.value = PlayerPrefs.GetFloat("Volume");
+    }
     private void Update()
     {
+        //Saving Settings
+        PlayerPrefs.SetFloat("FOV", fovSetting.settingSlider.value);
+        PlayerPrefs.SetFloat("Sensitivity", sensSetting.settingSlider.value);
+        PlayerPrefs.SetFloat("Volume", volumeSetting.settingSlider.value);
+
+        //Camera settings
         if(playerCamera != null){
             playerCamera.GetComponent<MouseLook>().enabled = !menuOpen;
+            playerCamera.GetComponent<MouseLook>().mouseSensitivity = Mathf.Round(sensSetting.settingSlider.value*10f)/10f;
+            playerCamera.fieldOfView = Mathf.Round(fovSetting.settingSlider.value*10f)/10f;
         }
         menuOpen = pauseMenu.activeInHierarchy;
+        //Volume settings
+        volumeMixer.SetFloat("volume", -80f + volumeSetting.settingSlider.value*(.9f));
+        //Locking the mouse
         if(inGame == false){
             Cursor.lockState = CursorLockMode.Confined;
         }
@@ -37,8 +82,6 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Test Scene"){
             inGame = true;
             playerCamera = GameObject.Find("Reg Camera").GetComponent<Camera>();
-            gunCamera = GameObject.Find("Gun Camera").GetComponent<Camera>();
-            playerCamera.fieldOfView = fov;
         } else {
             inGame = false;
         }
@@ -49,6 +92,16 @@ public class GameManager : MonoBehaviour
             }
         } else if(inGame == false){
             pauseMenu.SetActive(false);
+        }
+    }
+
+    public void MenuSwitch(GameObject Menu){
+        for(int i = 0; i < pauseMenuItems.Length; i++){
+            if(pauseMenuItems[i] != Menu){
+                pauseMenuItems[i].SetActive(false);
+            } else {
+                pauseMenuItems[i].SetActive(true);
+            }
         }
     }
     public KeybindManager keybindManager;

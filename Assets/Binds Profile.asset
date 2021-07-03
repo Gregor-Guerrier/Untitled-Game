@@ -64,3 +64,6 @@ MonoBehaviour:
   useGrenade:
     primaryBind: 0
     altBind: 0
+  pause:
+    primaryBind: 27
+    altBind: 0

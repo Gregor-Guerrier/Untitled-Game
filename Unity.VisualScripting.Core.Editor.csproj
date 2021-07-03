@@ -320,8 +320,8 @@
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Plugin\Changelogs\LegacyLudiqCore\Changelog_1_0_0.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Plugin\Changelogs\Changelog_1_4_13.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Inspection\EditorProvider.cs" />
-     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Plugins\PluginUtility.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Inspection\Root\LudiqScriptableObjectEditor.cs" />
+     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Plugins\PluginUtility.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Inspection\Special\CustomPropertyDrawerInspector.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Context\GraphSelection.cs" />
      <Compile Include="Library\PackageCache\com.unity.visualscripting@1.5.1-pre.3\Editor\VisualScripting.Core\Description\GraphItemDescriptor.cs" />

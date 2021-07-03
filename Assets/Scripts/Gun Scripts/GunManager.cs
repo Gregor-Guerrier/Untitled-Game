@@ -85,11 +85,16 @@ public class GunManager : MonoBehaviour {
 	private PlayerMovement _pm;
 	private GameManager gm;
 	private Vector3 adsLocation;
+	private GunSway gunSway;
+
+	public Camera gunCamera;
 	// Use this for initialization
 	void Start () {
+		gunSway = GetComponentInChildren<GunSway>();
 		originalPosition = gunModel.localPosition;
 		adsLocation.y = ((originalPosition.y - (originalPosition.y + sight.localPosition.y + GameObject.Find("Perspective").transform.localPosition.y)));
-		adsLocation.z = (transform.localPosition.z + (sight.localPosition.z + GameObject.Find("Perspective").transform.localPosition.z));
+		print(gunCamera.transform.position.z - GameObject.Find("Perspective").transform.position.z);
+		adsLocation.z = (transform.localPosition.z + (gunCamera.transform.position.z - GameObject.Find("Perspective").transform.position.z));
 		gm = GameObject.FindObjectOfType<GameManager>();
 		mouseLook = GetComponentInParent<MouseLook>();
 		camera = GetComponentInParent<Camera>();
@@ -110,128 +115,139 @@ public class GunManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		//Figure out if the gun is a shotgun or not
-		if(projectilesPerShot == 1)
-		{
-			NotShotgun();
-		} else 
-		{
-			Shotgun();
-		}
-
-		//Reloading
-		if (Input.GetKeyDown(gm.keybindManager.reload.primaryBind) && ammunition > 0 && reloadPassed <= 0)
-		{
-			Reload();		    
-		} else if (Input.GetKeyDown(gm.keybindManager.reload.altBind) && ammunition > 0 && reloadPassed <= 0)
-		{
-			Reload();	
-		}
-
-		//Switch Firemode
-		if(Input.GetKeyDown(gm.keybindManager.firemode.primaryBind) && modes.Length > 1)
-		{
-			Switch();
-		} else if(Input.GetKeyDown(gm.keybindManager.firemode.altBind) && modes.Length > 1)
-		{
-			Switch();
-		}
-
-		if(Input.GetKey(gm.keybindManager.controlledHipFire.primaryBind) && _pm.isAiming == false || Input.GetKey(gm.keybindManager.controlledHipFire.altBind) && _pm.isAiming == false)
-		{
-			_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
-			if(time > 0){time -= Time.deltaTime * 9;}
-			transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
-			spread = originalSpread*.5f * (((bloomEffect-1)*.5f)+1);
-			_pm.isControlledAiming = true;
-			hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
-		} else
-		{
-			spread = originalSpread;
-			hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
-			_pm.isControlledAiming = false;
-		}
-		//Aiming Down Sights
-		if(Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) && _pm.isControlledAiming == false || Input.GetKey(gm.keybindManager.aimDownSights.altBind) && _pm.isControlledAiming == false)
-		{
-			spread = 0;
-			bloomEffect = 1;
-			_pm.isAiming = true;
-			_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
-			if(time < 1)
+		hipFire.gameObject.SetActive(!gm.menuOpen);
+		gunSway.menuOpen = gm.menuOpen;
+		if(gm.menuOpen == false){
+			//Figure out if the gun is a shotgun or not
+			if(projectilesPerShot == 1)
 			{
-				time += Time.deltaTime * 9;
-				camera.transform.localPosition = Vector3.Lerp(new Vector3(0, 1.45f, .35f), new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), time);
-				transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
-				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+				NotShotgun();
+			} else 
+			{
+				Shotgun();
 			}
-			if(time > .2f)
+
+			//Reloading
+			if (Input.GetKeyDown(gm.keybindManager.reload.primaryBind) && ammunition > 0 && reloadPassed <= 0)
 			{
-				hipFire.gameObject.SetActive(false);
-				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask | (1 << 11);
+				Reload();		    
+			} else if (Input.GetKeyDown(gm.keybindManager.reload.altBind) && ammunition > 0 && reloadPassed <= 0)
+			{
+				Reload();	
 			}
-			
-			
-		} else if(!Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) && _pm.isControlledAiming == false || !Input.GetKeyDown(gm.keybindManager.aimDownSights.altBind) && _pm.isControlledAiming == false)
-		{
-			spread = originalSpread * bloomEffect;
-			if(time > 0)
+
+			//Switch Firemode
+			if(Input.GetKeyDown(gm.keybindManager.firemode.primaryBind) && modes.Length > 1)
 			{
-				
-				time -= Time.deltaTime * 9;
-				transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
-				camera.transform.localPosition = Vector3.Lerp(new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), new Vector3(0, 1.45f, .35f), 1-time);
-				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), time);
-				_pm.isAiming = false;
+				Switch();
+			} else if(Input.GetKeyDown(gm.keybindManager.firemode.altBind) && modes.Length > 1)
+			{
+				Switch();
 			}
-			if(time < .2f)
+
+			if(Input.GetKey(gm.keybindManager.controlledHipFire.primaryBind) && _pm.isAiming == false || Input.GetKey(gm.keybindManager.controlledHipFire.altBind) && _pm.isAiming == false)
 			{
-				reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask & ~ (1 << 11);
-				hipFire.gameObject.SetActive(true);
-				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
-				_pm.isAiming = false;
 				_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
+				if(time > 0){time -= Time.deltaTime * 9;}
+				transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
+				spread = originalSpread*.5f * (((bloomEffect-1)*.5f)+1);
+				_pm.isControlledAiming = true;
+				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+			} else
+			{
+				spread = originalSpread;
+				hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+				_pm.isControlledAiming = false;
+			}
+			//Aiming Down Sights
+			if(Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) && _pm.isControlledAiming == false || Input.GetKey(gm.keybindManager.aimDownSights.altBind) && _pm.isControlledAiming == false)
+			{
+				spread = 0;
+				bloomEffect = 1;
+				_pm.isAiming = true;
+				_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
+				if(time < 1)
+				{
+					time += Time.deltaTime * 9;
+					camera.transform.localPosition = Vector3.Lerp(new Vector3(0, 1.45f, .35f), new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), time);
+					transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
+					hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+				}
+				if(time > .2f)
+				{
+					hipFire.gameObject.SetActive(false);
+					if(reticle != null)
+					{
+						reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask | (1 << 11);
+					}
+				}
+				
+				
+			} else if(!Input.GetKey(gm.keybindManager.aimDownSights.primaryBind) && _pm.isControlledAiming == false || !Input.GetKeyDown(gm.keybindManager.aimDownSights.altBind) && _pm.isControlledAiming == false)
+			{
+				spread = originalSpread * bloomEffect;
+				if(time > 0)
+				{
+					
+					time -= Time.deltaTime * 9;
+					transform.localPosition = Vector3.Lerp(originalPosition, adsLocation, time);
+					camera.transform.localPosition = Vector3.Lerp(new Vector3(-sight.localPosition.z * 1.25f, 1.45f, .35f), new Vector3(0, 1.45f, .35f), 1-time);
+					hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), time);
+					_pm.isAiming = false;
+				}
+				if(time < .2f)
+				{
+					if(reticle != null)
+					{
+						reticle.parent.GetComponentInChildren<Camera>().cullingMask = reticle.parent.GetComponentInChildren<Camera>().cullingMask & ~ (1 << 11);
+					}
+					hipFire.gameObject.SetActive(true);
+					hipFire.sizeDelta = Vector2.Lerp(hipFire.sizeDelta, new Vector2(9*spread, 9*spread), Time.deltaTime);
+					_pm.isAiming = false;
+					_pm.adsSpeedMultiplyer = adsSpeedMultiplyer;
+				}
+				
 			}
 			
-		}
-		
-		if(Input.GetKey(gm.keybindManager.reload.primaryBind) || Input.GetKey(gm.keybindManager.aimDownSights.altBind))
-		{
-			Reload();
+			if(Input.GetKey(gm.keybindManager.reload.primaryBind) || Input.GetKey(gm.keybindManager.aimDownSights.altBind))
+			{
+				Reload();
+			}
 		}
 	}
 	void FixedUpdate () 
 	{
-		print(spread);
-		//Bloom Effect
-		bloomEffect -= Time.deltaTime*5;
-		if(bloomEffect < 1)
-		{
-			bloomEffect = 1;
-		} else if(bloomEffect > maxBloom)
-		{
-			bloomEffect = maxBloom;
-		}
-		bloomEffect += Mathf.Abs(Input.GetAxis("Horizontal")/7.5f);
-		bloomEffect += Mathf.Abs(Input.GetAxis("Vertical")/7.5f);
-		
-		//Reducing Time
-		recoilTime -= Time.deltaTime;
-	    timePassed -= Time.deltaTime;
-	    reloadPassed -= Time.deltaTime;
-
-
-		if(recoilTime > 0)
-		{
-			mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime;
-			mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime);
-			transform.parent.localPosition = Vector3.Lerp(transform.parent.localPosition, recoilPosition, Time.deltaTime*5);
-		} else if(recoilTime < 0)
-		{
+		if(gm.menuOpen == false){
+			print(spread);
+			//Bloom Effect
+			bloomEffect -= Time.deltaTime*5;
+			if(bloomEffect < 1)
+			{
+				bloomEffect = 1;
+			} else if(bloomEffect > maxBloom)
+			{
+				bloomEffect = maxBloom;
+			}
+			bloomEffect += Mathf.Abs(Input.GetAxis("Horizontal")/7.5f);
+			bloomEffect += Mathf.Abs(Input.GetAxis("Vertical")/7.5f);
 			
-			transform.parent.localPosition = Vector3.Lerp(transform.parent.localPosition, oldPosition, Time.deltaTime*5);
+			//Reducing Time
+			recoilTime -= Time.deltaTime;
+			timePassed -= Time.deltaTime;
+			reloadPassed -= Time.deltaTime;
+
+
+			if(recoilTime > 0)
+			{
+				mouseLook.xRotation -= Random.Range(xRecoil.x, xRecoil.y) * Time.deltaTime;
+				mouseLook.playerBody.Rotate(Vector3.up * Random.Range(yRecoil.x, yRecoil.y) * Time.deltaTime);
+				transform.parent.localPosition = Vector3.Lerp(transform.parent.localPosition, recoilPosition, Time.deltaTime*5);
+			} else if(recoilTime < 0)
+			{
+				
+				transform.parent.localPosition = Vector3.Lerp(transform.parent.localPosition, oldPosition, Time.deltaTime*5);
+			}
 		}
-		
 	}
 
 	

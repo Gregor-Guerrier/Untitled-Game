@@ -515,6 +515,7 @@ MonoBehaviour:
   amount: 0.025
   maxAmount: 0.1
   smoothAmount: 1
+  menuOpen: 0
 --- !u!1001 &307511659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -938,7 +939,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: aabac590983e5e94f9a0f7a871d186bc, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 5ff2c66810095294c8a6a6b125899ae4, type: 2}
+      objectReference: {fileID: 2100000, guid: 38e92e66ec2f31d4299b0373deeec95d, type: 2}
     - target: {fileID: 919132149155446097, guid: aabac590983e5e94f9a0f7a871d186bc, type: 3}
       propertyPath: m_Name
       value: RedDotSight
